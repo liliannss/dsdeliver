@@ -34,7 +34,7 @@
       "response": []
     },
     {
-      "name": "Get Products Pending",
+      "name": "Get Orders Pending",
       "request": {
         "method": "GET",
         "header": [],
