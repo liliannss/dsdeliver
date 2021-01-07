@@ -17,20 +17,22 @@ public class OrderDTO implements Serializable {
 
     private static final long serialVersionUID = -4602126946733068967L;
 
+    private Long id;
     private String address;
     private Double latitude;
     private Double longitude;
     private Instant moment;
     private OrderStatus status;
-    private List<ProductDTO> productDTOList = new ArrayList<>();
+    private List<ProductDTO> products = new ArrayList<>();
 
     public OrderDTO(Order order) {
+        id = order.getId();
         address = order.getAddress();
         latitude = order.getLatitude();
         longitude = order.getLongitude();
         moment = order.getMoment();
         status = order.getStatus();
-        productDTOList = order
+        products = order
                 .getProducts()
                 .stream()
                 .map(product -> new ProductDTO(product))

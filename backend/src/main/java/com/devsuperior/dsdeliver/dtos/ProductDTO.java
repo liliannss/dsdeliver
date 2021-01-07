@@ -12,12 +12,14 @@ public class ProductDTO implements Serializable {
 
     private static final long serialVersionUID = -8128070838967050440L;
 
+    private Long id;
     private String name;
     private Double price;
     private String description;
     private String imageUri;
 
     public ProductDTO(Product product) {
+        id = product.getId();
         name = product.getName();
         price = product.getPrice();
         description = product.getDescription();

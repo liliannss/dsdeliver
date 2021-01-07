@@ -8,5 +8,6 @@ import java.util.List;
 public interface OrderService {
 
     List<OrderDTO> findAll(OrderStatus status);
+    OrderDTO insert(OrderDTO orderDTO);
 
 }
