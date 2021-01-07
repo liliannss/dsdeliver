@@ -30,7 +30,7 @@ public class Order implements Serializable {
 
     //O mesmo pedido não pode ter mais de uma ocorrência do mesmo produto
     //O Set garante a criação da tabela de associação
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "tb_order_product",
             joinColumns = @JoinColumn(name = "order_id"),
