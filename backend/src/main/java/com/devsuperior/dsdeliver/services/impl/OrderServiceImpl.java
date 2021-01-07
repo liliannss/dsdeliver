@@ -56,4 +56,16 @@ public class OrderServiceImpl implements OrderService {
         return new OrderDTO(order);
     }
 
+    @Override
+    @Transactional
+    public OrderDTO update(Long id) {
+        Order order = orderRepository.getOne(id);
+
+        order.setStatus(OrderStatus.DELIVERED);
+
+        orderRepository.save(order);
+
+        return new OrderDTO(order);
+    }
+
 }

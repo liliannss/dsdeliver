@@ -7,9 +7,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -27,16 +27,20 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<OrderDTO> insert(@RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<OrderDTO> insert(UriComponentsBuilder uriComponentsBuilder, @RequestBody OrderDTO orderDTO) {
         OrderDTO dto = service.insert(orderDTO);
 
-        URI uri = ServletUriComponentsBuilder
-                .fromCurrentRequestUri()
-                .path("/{id}")
-                .buildAndExpand(orderDTO.getId())
-                .toUri();
+        UriComponents uriComponents = getUriComponents(uriComponentsBuilder, dto);
 
-        return ResponseEntity.created(uri).body(dto);
+        return ResponseEntity.created(uriComponents.toUri()).body(dto);
+    }
+
+    private UriComponents getUriComponents(UriComponentsBuilder uriComponentsBuilder, OrderDTO dto) {
+        UriComponents uriComponents =
+                uriComponentsBuilder
+                        .path("/{id}")
+                        .buildAndExpand(dto.getId());
+        return uriComponents;
     }
 
 }

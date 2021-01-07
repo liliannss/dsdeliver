@@ -9,5 +9,6 @@ public interface OrderService {
 
     List<OrderDTO> findAll(OrderStatus status);
     OrderDTO insert(OrderDTO orderDTO);
+    OrderDTO update(Long id);
 
 }
